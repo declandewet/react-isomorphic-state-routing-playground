@@ -7,10 +7,7 @@ global.React = require('react/addons')
 global._     = require('lodash')
 
 const Root   = require('../scripts/components/root')
-const {
-    routes,
-    redirects,
-} = require('../scripts/routes')
+const routes = require('../scripts/routes')
 
 const PRODUCTION = process.env.NODE_ENV === 'production'
 const PORT       = PRODUCTION ? 8080 : 4000
@@ -43,7 +40,6 @@ app.use((req, res, next) => {
     params: req.params,
     lang: 'en',
     routes,
-    redirects,
     meta: {
       charSet: 'utf-8',
       author: 'Declan de Wet'

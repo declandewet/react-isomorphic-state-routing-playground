@@ -11,6 +11,10 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/home', (req, res) => {
+  res.redirect('/')
+})
+
 router.get('/users/:id', (req, res) => {
   setTimeout(() => {
     let user, title

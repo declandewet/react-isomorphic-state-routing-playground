@@ -45,20 +45,20 @@ export default class ReactPage extends Component {
   componentDidMount() {
     if (isMounted(this)) {
 
-      let { props }             = this
-      let { routes, redirects } = props
+      let { props }  = this
+      let { routes } = props
 
       ReactPage.middleware(this._attachQueryParams)
 
       for (let [route, Handler] of entries(routes)) {
-        ReactPage.route(
-          route,
-          this._intializeRoutes.bind(this, route, Handler)
-        )
-      }
-
-      for (let [from, to] of entries(redirects)) {
-        ReactPage.redirect(from, to)
+        if (typeof Handler !== 'string') {
+          ReactPage.route(
+            route,
+            this._intializeRoutes.bind(this, route, Handler)
+          )
+        } else {
+          ReactPage.redirect(route, Handler)
+        }
       }
 
       ReactPage.start({ dispatch: false })
@@ -75,7 +75,7 @@ export default class ReactPage extends Component {
     let { routes, url } = props
 
     for (let [route, Handler] of entries(routes)) {
-      if (pathToRegExp(route, []).exec(url)) {
+      if (pathToRegExp(route, []).exec(url) && typeof Handler !== 'string') {
         MatchedHandler = (
           <DocumentTitle {...props}>
             <Handler {...props} />
@@ -100,6 +100,8 @@ export default class ReactPage extends Component {
         your backend that detects "ReactPageNavigationError", if caught,
         move on to the next middleware in your server pipeline, if not,
         call "React.render()".
+
+        If you want, you can do both.
 
         For more information, visit
         http://react-page.github.io/errors/react-page-navigation-error

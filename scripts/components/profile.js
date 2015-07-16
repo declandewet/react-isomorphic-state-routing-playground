@@ -9,7 +9,7 @@ export default class Profile extends Component {
       : (<div>
           <h1>{this.props.user}'s Profile</h1>
           <ul>
-            <li><a href='/'>Go back home</a></li>
+            <li><a href='/home'>Go back home (this is a redirected route)</a></li>
           </ul>
         </div>)
 
