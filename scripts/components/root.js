@@ -9,16 +9,6 @@ export default class Root extends Component {
 
   state = { rendered: false }
 
-  static defaultProps = {
-    lang: 'en',
-    title: 'Isomorphic Routing test',
-    meta: {
-      charSet: 'utf-8',
-      description: 'A state-based, isomorphic routing example site',
-      author: 'Declan de Wet',
-    },
-  }
-
   componentDidMount() {
     delete window.store
     this.setState({ rendered: true })

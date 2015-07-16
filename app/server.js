@@ -41,12 +41,17 @@ app.use((req, res, next) => {
     query: req.query,
     url: req.url,
     params: req.params,
+    lang: 'en',
     routes,
     redirects,
+    meta: {
+      charSet: 'utf-8',
+      author: 'Declan de Wet'
+    }
   })
   res.sendPayload = function createPayload(data) {
     res.payload = _.assign(res.payload, {
-      params: req.params,
+      params: req.params
     }, data)
     next()
   }

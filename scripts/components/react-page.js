@@ -134,6 +134,11 @@ export default class ReactPage extends Component {
 
       json = await response.json()
 
+    } catch (error) {
+      throw new ReactPageNavigationError(singleLine`
+        There was an error when attempting to set router state to new component.
+      `)
+    } finally {
       props     = Object.assign({}, props, json)
       component = (
         <DocumentTitle {...props}>
@@ -142,11 +147,6 @@ export default class ReactPage extends Component {
       )
 
       this.setState({ component })
-
-    } catch (error) {
-      throw new ReactPageNavigationError(singleLine`
-        There was an error when attempting to set router state to new component.
-      `)
     }
   }
 
