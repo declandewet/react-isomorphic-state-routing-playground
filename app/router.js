@@ -20,7 +20,7 @@ router.get('/users/:id', (req, res) => {
     } else if (id === 2) {
       user = 'Batman'
     } else {
-      user = 'NotFound'
+      res.redirect('/notfound')
     }
     title = `${user}'s Profile`
     res.sendPayload({
